@@ -1,4 +1,4 @@
-package br.com.tales.sreenmatch.service;
+package br.com.tales.screenmatch.service;
 
 import java.io.IOException;
 import java.net.URI;

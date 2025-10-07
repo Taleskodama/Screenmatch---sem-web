@@ -1,4 +1,4 @@
-package br.com.tales.sreenmatch.service;
+package br.com.tales.screenmatch.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

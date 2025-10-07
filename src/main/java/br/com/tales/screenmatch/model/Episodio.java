@@ -1,4 +1,4 @@
-package br.com.tales.sreenmatch.model;
+package br.com.tales.screenmatch.model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

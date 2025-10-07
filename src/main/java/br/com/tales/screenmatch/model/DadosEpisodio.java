@@ -1,4 +1,4 @@
-package br.com.tales.sreenmatch.model;
+package br.com.tales.screenmatch.model;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
