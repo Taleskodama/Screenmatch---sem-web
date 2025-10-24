@@ -1,9 +1,6 @@
 package br.com.tales.screenmatch.principal;
 
-import br.com.tales.screenmatch.model.DadosSerie;
-import br.com.tales.screenmatch.model.DadosTemporada;
-import br.com.tales.screenmatch.model.Episodio;
-import br.com.tales.screenmatch.model.Serie;
+import br.com.tales.screenmatch.model.*;
 import br.com.tales.screenmatch.repository.SerieRepository;
 import br.com.tales.screenmatch.service.ConsumoApi;
 import br.com.tales.screenmatch.service.ConverteDados;
@@ -40,6 +37,8 @@ public class Principal {
                 4 - Buscar série por Título
                 5 - Buscar séries por Ator
                 6 - Top 5 séries
+                7 - Buscar séries por categoria
+                8 - Buscar séries por número de temporadas e avaliação mínima
 
                 0 - Sair
                 """;
@@ -66,6 +65,12 @@ public class Principal {
               break;
           case 6:
               buscarTop5Series();
+              break;
+          case 7:
+              buscarSeriesPorCategoria();
+              break;
+          case 8:
+              buscarSeriesPorTemporadaAvaliacaoMinima();
               break;
         case 0:
           System.out.println("Saindo...");
@@ -158,5 +163,24 @@ public class Principal {
   private void buscarTop5Series(){
       List<Serie> serieTop = repositorio.findTop5ByOrderByAvaliacaoDesc();
       serieTop.forEach(s -> System.out.println(s.getTitulo() + " avaliação: " + s.getAvaliacao()));
+  }
+
+  private void buscarSeriesPorCategoria(){
+    System.out.println("Deseja buscar séries de que categoria/gênero? ");
+    var nomeGenero = leitura.nextLine();
+      Categoria categoria = Categoria.fromPortugues(nomeGenero);
+      List<Serie> seriesPorCategoria = repositorio.findByGenero(categoria);
+    System.out.println("Séries da categoria " + nomeGenero);
+    seriesPorCategoria.forEach(System.out::println);
+  }
+
+  private void buscarSeriesPorTemporadaAvaliacaoMinima(){
+    System.out.println("Coloque o número máximo de Temporadas: ");
+    var numeroTemporadas = leitura.nextInt();
+    System.out.println("Coloque a avaliação mínima da série: ");
+    var  avaliacaoMinima = leitura.nextDouble();
+    List<Serie> seriesMaxTemporadaAvaliacaoMinima = repositorio.findByTotalTemporadasLessThanEqualAndAvaliacaoGreaterThanEqual(numeroTemporadas,avaliacaoMinima);
+    System.out.println("Séries com número máximo de: " + numeroTemporadas + "temporadas e avaliação mínima de: " +  avaliacaoMinima );
+    seriesMaxTemporadaAvaliacaoMinima.forEach(System.out::println);
   }
 }
