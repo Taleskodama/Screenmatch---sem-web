@@ -39,6 +39,7 @@ public class Principal {
                 6 - Top 5 séries
                 7 - Buscar séries por categoria
                 8 - Buscar séries por número de temporadas e avaliação mínima
+                9 - Buscar episódios por Trecho
 
                 0 - Sair
                 """;
@@ -71,6 +72,9 @@ public class Principal {
               break;
           case 8:
               buscarSeriesPorTemporadaAvaliacaoMinima();
+              break;
+          case 9:
+              buscarEpisodioPorTrecho();
               break;
         case 0:
           System.out.println("Saindo...");
@@ -182,5 +186,15 @@ public class Principal {
     List<Serie> seriesMaxTemporadaAvaliacaoMinima = repositorio.seriePorTemporadaEAvaliacao(numeroTemporadas, avaliacaoMinima);
     System.out.println("Séries com número máximo de: " + numeroTemporadas + " temporadas e avaliação mínima de: " +  avaliacaoMinima );
     seriesMaxTemporadaAvaliacaoMinima.forEach(System.out::println);
+  }
+
+  private void buscarEpisodioPorTrecho(){
+    System.out.println("Digite o nome do episódio para busca: ");
+    var trechoEpisodio = leitura.nextLine();
+    List<Episodio> episodiosEncontrados = repositorio.episodiosPorTrecho(trechoEpisodio);
+    episodiosEncontrados.forEach(e ->
+            System.out.printf("Série: %s Temporada %s - Episódio %s - %s\n",
+                    e.getSerie().getTitulo(), e.getTemporada(),
+                    e.getNumeroEpisodio(), e.getTitulo()));;
   }
 }

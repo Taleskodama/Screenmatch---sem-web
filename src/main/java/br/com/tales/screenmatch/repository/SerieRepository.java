@@ -1,6 +1,7 @@
 package br.com.tales.screenmatch.repository;
 
 import br.com.tales.screenmatch.model.Categoria;
+import br.com.tales.screenmatch.model.Episodio;
 import br.com.tales.screenmatch.model.Serie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +20,10 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
 
     List<Serie> findByTotalTemporadasLessThanEqualAndAvaliacaoGreaterThanEqual(int numeroTemporadas, double avaliacaoMinima);
 
-    @Query("SELECT s FROM Serie s where s.totalTemporadas <= :numeroTemporadas and s.avaliacao >= :avaliacaoMinima")
+    @Query("SELECT s FROM Serie s WHERE s.totalTemporadas <= :numeroTemporadas AND s.avaliacao >= :avaliacaoMinima")
     List<Serie> seriePorTemporadaEAvaliacao(int numeroTemporadas, double avaliacaoMinima);
+
+
+    @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE e.titulo ILIKE %:trechoEpisodio%")
+    List<Episodio> episodiosPorTrecho(String trechoEpisodio);
 }
