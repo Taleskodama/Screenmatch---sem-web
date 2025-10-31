@@ -179,8 +179,8 @@ public class Principal {
     var numeroTemporadas = leitura.nextInt();
     System.out.println("Coloque a avaliação mínima da série: ");
     var  avaliacaoMinima = leitura.nextDouble();
-    List<Serie> seriesMaxTemporadaAvaliacaoMinima = repositorio.findByTotalTemporadasLessThanEqualAndAvaliacaoGreaterThanEqual(numeroTemporadas,avaliacaoMinima);
-    System.out.println("Séries com número máximo de: " + numeroTemporadas + "temporadas e avaliação mínima de: " +  avaliacaoMinima );
+    List<Serie> seriesMaxTemporadaAvaliacaoMinima = repositorio.seriePorTemporadaEAvaliacao(numeroTemporadas, avaliacaoMinima);
+    System.out.println("Séries com número máximo de: " + numeroTemporadas + " temporadas e avaliação mínima de: " +  avaliacaoMinima );
     seriesMaxTemporadaAvaliacaoMinima.forEach(System.out::println);
   }
 }
